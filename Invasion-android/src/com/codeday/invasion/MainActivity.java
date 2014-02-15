@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.werner.pong.Pong;
 
 public class MainActivity extends AndroidApplication
 {
@@ -16,6 +15,6 @@ public class MainActivity extends AndroidApplication
 		config.useAccelerometer = false;
 		config.useCompass = false;
 		config.useGL20 = true;
-		initialize(new Pong(), config);
+		initialize(new Invasion(), config);
 	}
 }
