@@ -26,6 +26,7 @@ public class World extends Stage
 	private BitmapFont font;
 	private ArrayList<Asteroid> asteroidList;
 	private TextureAtlas atlas;
+	private Player player;
 	
 	enum GameState{
 		COUNTDOWN,
@@ -56,14 +57,19 @@ public class World extends Stage
 //        for (AtlasRegion a : atlas.getRegions())
 //        	System.out.println(a.name);
         
-        for (Asteroid a : asteroidList)
-        {
-        	addActor(a);
-        	a.setPosition(getWidth() / 2, getHeight() / 2);
-        }
+//        for (Asteroid a : asteroidList)
+//        {
+//        	addActor(a);
+//        	a.setPosition(getWidth() / 2, getHeight() / 2);
+//        }
         
-        setupCountdown();
-        startCountdown();
+        player = new Player(atlas.findRegion("playerLeft"), 
+			        		atlas.findRegion("playerLeft"), 
+			        		atlas.findRegion("playerLeft"));
+        player.setPosition(getWidth() / 2 - player.getWidth() / 2, getHeight() / 2 - player.getWidth() );
+        addActor(player);
+//        setupCountdown();
+//        startCountdown();
 	}
 	
 	private void setupCountdown()
@@ -132,6 +138,11 @@ public class World extends Stage
 		
 		if (gameState.equals(GameState.PLAYING))
 		{
+			float rotate = 0;
+			if (controller.isKeyDown(Keys.LEFT))
+				rotate -= 15;
+			if (controller.isKeyDown(Keys.RIGHT));
+			player.update(delta, this, rotate, 0);
 //			if (controller.isKeyDown(Keys.A))
 //				player1.move(true, delta, getHeight());
 //			else if (controller.isKeyDown(Keys.Z))
@@ -210,5 +221,10 @@ public class World extends Stage
 	public Invasion getGame()
 	{
 		return game;
+	}
+	
+	public TextureAtlas getAtlas()
+	{
+		return atlas;
 	}
 }

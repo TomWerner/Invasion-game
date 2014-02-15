@@ -15,8 +15,8 @@ public class Player extends Image
 	
 	public static float MAX_SPEED = 100;
 	public static float MAX_ACCELERATION_SQUARED = 5;
-	private Vector2 velocity;
-	private Vector2 acceleration;
+	private Vector2 velocity = new Vector2(0, 0);
+	private Vector2 acceleration = new Vector2(0, 0);
 
 	public Player(TextureRegion left, TextureRegion middle, TextureRegion right)
 	{
