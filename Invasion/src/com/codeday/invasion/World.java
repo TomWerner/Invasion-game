@@ -27,7 +27,7 @@ public class World extends Stage
 	private ArrayList<Asteroid> asteroidList;
 	private TextureAtlas atlas;
 	private Player player;
-	
+	private Laser laser;
 	enum GameState{
 		COUNTDOWN,
 		PLAYING,
@@ -70,6 +70,7 @@ public class World extends Stage
         addActor(player);
 //        setupCountdown();
 //        startCountdown();
+        
 	}
 	
 	private void setupCountdown()
@@ -138,11 +139,20 @@ public class World extends Stage
 		
 		if (gameState.equals(GameState.PLAYING))
 		{
+
 			float rotate = 0;
 			if (controller.isKeyDown(Keys.LEFT))
 				rotate -= 15;
 			if (controller.isKeyDown(Keys.RIGHT));
 			player.update(delta, this, rotate, 0);
+			if(controller.isKeyDown(Keys.SPACE ))
+			{
+				laser = new Laser(atlas.findRegion("laserRed"), player.getAngle());
+		        laser.setPosition(player.getWidth(), player.getHeight());
+		        addActor(laser);
+				laser.update(delta, this);
+				
+			}
 //			if (controller.isKeyDown(Keys.A))
 //				player1.move(true, delta, getHeight());
 //			else if (controller.isKeyDown(Keys.Z))
