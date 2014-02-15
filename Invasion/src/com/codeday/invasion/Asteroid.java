@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class Asteroid extends Image {
@@ -18,7 +19,7 @@ public class Asteroid extends Image {
 		randomizeDirection();
 	}
 	
-	public void update(float delta, World world, ArrayList<Laser> list)
+	public void update(float delta, ArrayList<Laser> list)
 	{
 		float screenWidth = world.getWidth();
 		float screenHeight = world.getHeight();
@@ -28,13 +29,19 @@ public class Asteroid extends Image {
 		setX(xPotential);
 		setY(yPotential);
 		
-		Iterator itr = list.iterator();
+		Iterator<Laser> itr = list.iterator();
 		
-		/*while(itr.hasNext() ) {
+		while(itr.hasNext() ) {
+			Laser laser = itr.next();
 			
-			
-			
-		}*/
+			if(laser.getX() == this.getX() && 
+			laser.getY() == this.getY())
+			{
+				Actions.removeActor();
+				
+				new SmallAsteroid = SmallAsteroid(world.atlas.findRegion("meteorSmall"));
+			}
+		}
 		
 	}
 	
@@ -44,7 +51,7 @@ public class Asteroid extends Image {
 		float y = this.getY();
 
 		setOrigin(getWidth() / 2, getHeight() / 2);
-		rotate(15);
+		rotate(5);
 	}
 
 	public void randomizeDirection()
