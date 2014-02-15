@@ -24,7 +24,7 @@ public class Player extends Image
 		this.left = new TextureRegionDrawable(left);
 		this.middle = new TextureRegionDrawable(middle);
 		this.right = new TextureRegionDrawable(right);
-		angle = 0;
+		angle = 90;
 	}
 	
 	public void update(float delta, World world, float rotate, float thrust)
@@ -32,9 +32,9 @@ public class Player extends Image
 		if (rotate == 0)
 			setDrawable(middle);
 		else if (rotate < 0)
-			setDrawable(left);
-		else
 			setDrawable(right);
+		else
+			setDrawable(left);
 			
 		setOrigin(getWidth() / 2, getHeight() / 2);
 		rotate(rotate * delta);
@@ -42,15 +42,9 @@ public class Player extends Image
 
 		float dxA = (float) (Math.cos(Math.toRadians(angle)) * thrust);
 		float dyA = (float) (Math.sin(Math.toRadians(angle)) * thrust);
-		Vector2 accelPotential = acceleration.add(dxA, dxA);
-		if (accelPotential.len2() <= MAX_ACCELERATION_SQUARED)
-			acceleration.add(dxA, dyA);
 		
-		velocity.add(acceleration.cpy().scl(delta));
-		
-		Vector2 dV = velocity.cpy().scl(delta);
-		setX(getX() + dV.x);
-		setY(getY() + dV.y);
+		setX(getX() + dxA);
+		setY(getY() + dyA);
 	}
 	
 	public float getAngle()
